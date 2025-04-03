@@ -43,7 +43,7 @@ export default function Home() {
 
   const updateTodo = async (props: TTodo) => {
     try {
-      const todo = await db.updateDocument(appWriteConfig.db, appWriteConfig.col.todos, props.$id, {
+      await db.updateDocument(appWriteConfig.db, appWriteConfig.col.todos, props.$id, {
         ...props,
       });
     } catch (e) {

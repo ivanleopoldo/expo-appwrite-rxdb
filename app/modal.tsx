@@ -1,9 +1,10 @@
-import { appWriteConfig, db } from '@/lib/appwrite';
 import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { ID } from 'react-native-appwrite';
+
+import { appWriteConfig, db } from '@/lib/appwrite';
 
 export default function Modal() {
   const [value, setValue] = React.useState('');
@@ -13,14 +14,9 @@ export default function Modal() {
     try {
       setLoading(true);
 
-      const todo = await db.createDocument(
-        appWriteConfig.db,
-        appWriteConfig.col.todos,
-        ID.unique(),
-        {
-          title: value,
-        }
-      );
+      await db.createDocument(appWriteConfig.db, appWriteConfig.col.todos, ID.unique(), {
+        title: value,
+      });
       router.back();
     } catch (e) {
       console.error(e);
