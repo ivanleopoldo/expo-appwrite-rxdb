@@ -11,15 +11,7 @@
       "favicon": "./assets/favicon.png"
     },
     "icon": "./assets/icon.png",
-    "plugins": [
-      "expo-router",
-      [
-        "expo-dev-launcher",
-        {
-          "launchMode": "most-recent"
-        }
-      ]
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
