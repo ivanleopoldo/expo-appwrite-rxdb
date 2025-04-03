@@ -1,14 +1,14 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { router } from 'expo-router';
 import React from 'react';
 import { FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
+import { Query } from 'react-native-appwrite';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Icon from '@/components/Icon';
 import Todo from '@/components/Todo';
 import { appWriteConfig, db } from '@/lib/appwrite';
 import { TTodo } from '@/lib/types';
-import { router } from 'expo-router';
-import { Query } from 'react-native-appwrite';
 
 export default function Home() {
   const { showActionSheetWithOptions } = useActionSheet();
@@ -21,11 +21,9 @@ export default function Home() {
 
   const fetchTodos = async () => {
     try {
-      const { documents, total } = await db.listDocuments(
-        appWriteConfig.db,
-        appWriteConfig.col.todos,
-        [Query.limit(25)]
-      );
+      const { documents } = await db.listDocuments(appWriteConfig.db, appWriteConfig.col.todos, [
+        Query.limit(25),
+      ]);
       setTodos(documents as TTodo[]);
     } catch (e) {
       console.error(e);
