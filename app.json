@@ -18,14 +18,6 @@
         {
           "launchMode": "most-recent"
         }
-      ],
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#ffffff",
-          "image": "./assets/splash.png",
-          "imageWidth": 200
-        }
       ]
     ],
     "experiments": {
