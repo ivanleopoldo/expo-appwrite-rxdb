@@ -2,18 +2,25 @@ import Checkbox from 'expo-checkbox';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export default function Todo() {
+import { TTodo } from '@/lib/types';
+import { cn } from '@/lib/utils';
+
+export default function Todo(props: TTodo & { isLast: boolean }) {
   const [isChecked, setChecked] = React.useState(false);
   return (
-    <View className="flex-row items-center gap-5 rounded-lg border border-neutral-300 bg-neutral-200 p-4">
+    <View
+      className={cn(
+        'flex-row items-center gap-5 border-t border-neutral-300/50 px-8 py-4',
+        props.isLast && 'border-b'
+      )}>
       <Checkbox
-        className="h-5 w-5 bg-neutral-200 text-neutral-200"
-        value={isChecked}
+        className="h-5 w-5"
+        value={props.completed && isChecked}
         onValueChange={() => {
           setChecked((prev) => !prev);
         }}
       />
-      <Text>Todo</Text>
+      <Text>{props.title}</Text>
     </View>
   );
 }

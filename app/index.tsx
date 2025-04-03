@@ -1,9 +1,10 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { Pressable, Text, View } from 'react-native';
+import { FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Icon from '@/components/Icon';
 import Todo from '@/components/Todo';
+import { TTodo } from '@/lib/types';
 
 export default function Home() {
   const { showActionSheetWithOptions } = useActionSheet();
@@ -33,17 +34,42 @@ export default function Home() {
     );
   };
 
+  const data: TTodo[] = [
+    {
+      $id: '1',
+      title: 'Todo 1',
+      completed: false,
+    },
+    {
+      $id: '2',
+      title: 'Todo 2',
+      completed: false,
+    },
+  ];
+
   return (
-    <SafeAreaView className="mx-4 mt-10 gap-5">
-      <View className="flex-row items-center justify-between ">
+    <SafeAreaView className="mt-10 gap-5">
+      <View className="mx-5 flex-row items-center justify-between ">
         <Text className="text-5xl font-bold">Todos</Text>
         <Pressable onPress={() => {}}>
           <Icon name="Plus" className="text-black" />
         </Pressable>
       </View>
-      <Pressable onLongPress={onLongPress}>
-        <Todo />
-      </Pressable>
+      <FlatList
+        data={data}
+        renderItem={({ item, index }: { item: TTodo; index: number }) => {
+          return (
+            <Pressable key={item.$id} onLongPress={onLongPress}>
+              <Todo
+                $id={item.$id}
+                title={item.title}
+                completed={item.completed}
+                isLast={index + 1 === data.length}
+              />
+            </Pressable>
+          );
+        }}
+      />
     </SafeAreaView>
   );
 }
