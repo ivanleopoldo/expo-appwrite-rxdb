@@ -112,19 +112,14 @@ export default function Home() {
         keyExtractor={(item) => item.$id}
         renderItem={({ item, index }: { item: TTodo; index: number }) => {
           return (
-            <Pressable
-              key={item.$id}
-              onLongPress={() => {
-                onLongPress(item.$id);
-              }}>
-              <Todo
-                $id={item.$id}
-                title={item.title}
-                completed={item.completed}
-                isLast={index + 1 === todos.length}
-                update={updateTodo}
-              />
-            </Pressable>
+            <Todo
+              $id={item.$id}
+              title={item.title}
+              completed={item.completed}
+              isLast={index + 1 === todos.length}
+              onLongPress={() => onLongPress(item.$id)}
+              update={updateTodo}
+            />
           );
         }}
       />
