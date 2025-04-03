@@ -88,7 +88,6 @@ export default function Home() {
             deleteTodo(todoId);
             break;
           default:
-            // Cancel
             break;
         }
       }
@@ -107,17 +106,21 @@ export default function Home() {
         </Pressable>
       </View>
       <FlatList
+        className="h-full"
         data={todos}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
         keyExtractor={(item) => item.$id}
+        ListEmptyComponent={() => (
+          <View className="h-full w-full flex-1 items-center justify-center">
+            <Text>Add a Todo!</Text>
+          </View>
+        )}
         renderItem={({ item, index }: { item: TTodo; index: number }) => {
           return (
             <Todo
-              $id={item.$id}
-              title={item.title}
-              completed={item.completed}
+              data={item}
               isLast={index + 1 === todos.length}
-              onLongPress={() => onLongPress(item.$id)}
+              onLongPress={onLongPress}
               update={updateTodo}
             />
           );

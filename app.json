@@ -10,12 +10,21 @@
       "output": "static",
       "favicon": "./assets/favicon.png"
     },
+    "icon": "./assets/icon.png",
     "plugins": [
       "expo-router",
       [
         "expo-dev-launcher",
         {
           "launchMode": "most-recent"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash.png",
+          "imageWidth": 200
         }
       ]
     ],
@@ -24,7 +33,6 @@
       "tsconfigPaths": true
     },
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
