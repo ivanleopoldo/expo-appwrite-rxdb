@@ -62,6 +62,14 @@ export default function Home() {
     }
   };
 
+  const deleteTodo = async (todoId: string) => {
+    try {
+      await db.deleteDocument(appWriteConfig.db, appWriteConfig.col.todos, todoId);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const onLongPress = (todoId: string) => {
     const options = ['Edit', 'Delete', 'Cancel'];
 
@@ -77,7 +85,7 @@ export default function Home() {
             router.push(`/${todoId}`);
             break;
           case 1:
-            // Delete
+            deleteTodo(todoId);
             break;
           default:
             // Cancel
