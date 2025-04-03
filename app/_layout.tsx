@@ -32,6 +32,22 @@ export default function RootLayout() {
             },
           }}
         />
+        <Stack.Screen
+          name="[todoId]"
+          options={{
+            presentation: 'modal',
+            headerLeft: () => {
+              return (
+                <Pressable
+                  onPress={() => {
+                    router.back();
+                  }}>
+                  <Icon name="ChevronLeft" />
+                </Pressable>
+              );
+            },
+          }}
+        />
       </Stack>
     </ActionSheetProvider>
   );

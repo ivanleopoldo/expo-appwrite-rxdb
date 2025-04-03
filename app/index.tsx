@@ -62,7 +62,7 @@ export default function Home() {
     }
   };
 
-  const onLongPress = () => {
+  const onLongPress = (todoId: string) => {
     const options = ['Edit', 'Delete', 'Cancel'];
 
     showActionSheetWithOptions(
@@ -74,7 +74,7 @@ export default function Home() {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            // Edit
+            router.push(`/${todoId}`);
             break;
           case 1:
             // Delete
@@ -104,7 +104,11 @@ export default function Home() {
         keyExtractor={(item) => item.$id}
         renderItem={({ item, index }: { item: TTodo; index: number }) => {
           return (
-            <Pressable key={item.$id} onLongPress={onLongPress}>
+            <Pressable
+              key={item.$id}
+              onLongPress={() => {
+                onLongPress(item.$id);
+              }}>
               <Todo
                 $id={item.$id}
                 title={item.title}
