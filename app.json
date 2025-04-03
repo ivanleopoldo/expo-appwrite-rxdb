@@ -34,12 +34,15 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ivanleopoldoc.expoappwriterxdb"
+      "bundleIdentifier": "com.ivanleopoldoc.expoappwriterxdb",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/adaptive-icon/foreground.png",
+        "backgroundImage": "./assets/adaptive-icon/background.png"
       },
       "package": "com.ivanleopoldoc.expoappwriterxdb"
     },
