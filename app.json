@@ -4,6 +4,7 @@
     "slug": "expo-appwrite-rxdb",
     "version": "1.0.0",
     "scheme": "expo-appwrite-rxdb",
+    "newArchEnabled": true,
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -30,9 +31,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ivanleopoldoc.expoappwriterxdb"
