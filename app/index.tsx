@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Icon from '@/components/Icon';
 import Todo from '@/components/Todo';
-import { appWriteConfig, db } from '@/lib/appwrite';
+import { appWriteConfig, client, db } from '@/lib/appwrite';
 import { TTodo } from '@/lib/types';
 
 export default function Home() {
@@ -19,12 +19,33 @@ export default function Home() {
     fetchTodos();
   }, []);
 
+  React.useEffect((): any => {
+    const channel = `databases.${appWriteConfig.db}.collections.${appWriteConfig.col.todos}.documents`;
+
+    const unsubscribe = client.subscribe(channel, (payload) => {
+      fetchTodos();
+    });
+
+    return () => unsubscribe;
+  }, []);
+
   const fetchTodos = async () => {
     try {
       const { documents } = await db.listDocuments(appWriteConfig.db, appWriteConfig.col.todos, [
         Query.limit(25),
+        Query.orderDesc('$createdAt'),
       ]);
       setTodos(documents as TTodo[]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const updateTodo = async (props: TTodo) => {
+    try {
+      const todo = await db.updateDocument(appWriteConfig.db, appWriteConfig.col.todos, props.$id, {
+        ...props,
+      });
     } catch (e) {
       console.error(e);
     }
@@ -89,6 +110,7 @@ export default function Home() {
                 title={item.title}
                 completed={item.completed}
                 isLast={index + 1 === todos.length}
+                update={updateTodo}
               />
             </Pressable>
           );

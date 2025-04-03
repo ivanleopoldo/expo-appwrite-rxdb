@@ -1,6 +1,5 @@
 import { appWriteConfig, db } from '@/lib/appwrite';
-import { TTodo } from '@/lib/types';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Platform, Pressable, Text, TextInput, View } from 'react-native';
@@ -22,7 +21,7 @@ export default function Modal() {
           title: value,
         }
       );
-      console.log(todo as TTodo);
+      router.back();
     } catch (e) {
       console.error(e);
     } finally {
