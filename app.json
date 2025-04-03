@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "expo-appwrite-rxdb",
+    "name": "Todo",
     "slug": "expo-appwrite-rxdb",
     "version": "1.0.0",
     "scheme": "expo-appwrite-rxdb",
